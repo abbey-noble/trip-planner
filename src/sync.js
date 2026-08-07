@@ -53,6 +53,33 @@ export async function signIn(email) {
   if (error) throw error
 }
 
+/**
+ * Password sign-in. Supabase's built-in mail service is rate limited to a
+ * couple of messages an hour, so links are a poor primary route for a
+ * two-person trip. Passwords need no email at all.
+ */
+export async function signInWithPassword(email, password) {
+  const client = getClient()
+  if (!client) throw new Error('Sync is not set up yet.')
+  const { error } = await client.auth.signInWithPassword({
+    email: email.trim().toLowerCase(),
+    password,
+  })
+  if (error) throw error
+}
+
+export async function signUpWithPassword(email, password) {
+  const client = getClient()
+  if (!client) throw new Error('Sync is not set up yet.')
+  const { data, error } = await client.auth.signUp({
+    email: email.trim().toLowerCase(),
+    password,
+  })
+  if (error) throw error
+  // No session means the project still requires email confirmation.
+  return { needsConfirmation: !data.session }
+}
+
 export async function signOut() {
   const client = getClient()
   if (!client) return

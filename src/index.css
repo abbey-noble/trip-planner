@@ -1801,25 +1801,11 @@ textarea.form-input { resize: vertical; min-height: 62px; line-height: 1.55 }
 
 .image-url-input { font-size: 13.5px !important }
 
-/* ============ Banner ============ */
 
-.banner {
-  height: clamp(96px, 15vh, 190px);
-  background-size: cover;
-  background-position: center;
-  flex-shrink: 0;
-  border-bottom: 1px solid var(--rule-strong);
-  position: relative;
-}
 
-.banner::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(rgba(31, 28, 24, 0) 55%, rgba(31, 28, 24, 0.14));
-}
 
-.masthead.has-banner { padding-top: clamp(12px, 1.8vw, 18px) }
+
+
 
 /* ============ Itinerary bar ============ */
 
@@ -2114,49 +2100,44 @@ textarea.form-input { resize: vertical; min-height: 62px; line-height: 1.55 }
 
 /* ============ Photo masthead (narrow screens) ============ */
 
-/* Below the split breakpoint the card is full-bleed, so the cover photo would
-   never be seen. Putting it behind the masthead costs no extra height. */
-@media (max-width: 1023px) {
-  .masthead.has-photo {
+/* The photo sits behind the masthead at every width. */
+.masthead.has-photo {
     background-image: var(--masthead-photo);
     background-size: cover;
     background-position: center;
     border-bottom-color: rgba(31, 28, 24, 0.35);
-  }
+}
 
-  .masthead.has-photo::before {
+.masthead.has-photo::before {
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(rgba(22, 20, 17, 0.28), rgba(22, 20, 17, 0.66));
-  }
+}
 
-  .masthead.has-photo > * { position: relative; z-index: 1 }
+.masthead.has-photo > * { position: relative; z-index: 1 }
 
-  .masthead.has-photo .masthead-eyebrow { color: rgba(252, 250, 245, 0.75) }
+.masthead.has-photo .masthead-eyebrow { color: rgba(252, 250, 245, 0.75) }
 
-  .masthead.has-photo .header-title {
+.masthead.has-photo .header-title {
     color: #FCFAF5;
     text-shadow: 0 1px 12px rgba(18, 16, 12, 0.45);
-  }
+}
 
-  .masthead.has-photo .header-sub {
+.masthead.has-photo .header-sub {
     color: rgba(252, 250, 245, 0.9);
     border-top-color: rgba(252, 250, 245, 0.45);
-  }
+}
 
-  .masthead.has-photo .header-btn {
+.masthead.has-photo .header-btn {
     color: #FCFAF5;
     border-color: rgba(252, 250, 245, 0.55);
     background: rgba(22, 20, 17, 0.22);
-  }
-
-  .masthead.has-photo .header-btn:hover { color: #fff; border-color: #fff }
-
-  .masthead.has-photo .sync-dot { color: rgba(252, 250, 245, 0.85) }
-  .masthead.has-photo .sync-dot.synced { color: #A8C99A }
-  .masthead.has-photo .sync-dot.offline { color: #E39C86 }
-
-  /* The strip would repeat the same photo and cost real height */
-  .banner { display: none }
 }
+
+.masthead.has-photo .header-btn:hover { color: #fff; border-color: #fff }
+
+.masthead.has-photo .sync-dot { color: rgba(252, 250, 245, 0.85) }
+.masthead.has-photo .sync-dot.synced { color: #A8C99A }
+.masthead.has-photo .sync-dot.offline { color: #E39C86 }
+

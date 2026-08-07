@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { readConfig, writeConfig, clearConfig, isConfigured } from '../supabase'
-import { getSession, signIn, signOut, onAuthChange, getJoinCode, joinTrip } from '../sync'
+import {
+  getSession, signIn, signInWithPassword, signUpWithPassword,
+  signOut, onAuthChange, getJoinCode, joinTrip,
+} from '../sync'
 
 /** Connects this device to the shared copy of the trip. */
 export default function SyncPanel() {
@@ -106,55 +109,106 @@ function ConnectForm() {
 }
 
 function SignInForm() {
+  const [mode, setMode] = useState('signin')
   const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [state, setState] = useState('idle')
   const [error, setError] = useState('')
+  const [notice, setNotice] = useState('')
 
-  const send = async () => {
-    if (!email.trim()) return
-    setState('sending')
+  const submit = async () => {
+    if (!email.trim() || (mode !== 'link' && password.length < 6)) return
+    setState('working')
     setError('')
+    setNotice('')
     try {
-      await signIn(email)
-      setState('sent')
+      if (mode === 'signin') {
+        await signInWithPassword(email, password)
+      } else if (mode === 'signup') {
+        const { needsConfirmation } = await signUpWithPassword(email, password)
+        if (needsConfirmation) {
+          setNotice(
+            'Account created, but the project still requires email confirmation. '
+            + 'Turn off "Confirm email" in Supabase under Authentication → Sign In / Providers, '
+            + 'then sign in here.'
+          )
+        }
+      } else {
+        await signIn(email)
+        setNotice(`A sign-in link is on its way to ${email}. Open it on this device.`)
+      }
+      setState('idle')
     } catch (e) {
-      setError(e?.message || 'Could not send the link.')
+      setError(e?.message || 'That did not work.')
       setState('idle')
     }
   }
 
-  if (state === 'sent') {
-    return (
-      <div className="form-group">
-        <label className="form-label">Check your email</label>
-        <div className="form-hint">
-          A sign-in link is on its way to {email}. Open it on this device.
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div className="form-group">
+      <div className="mode-tabs">
+        <button
+          className={`filter-chip${mode === 'signin' ? ' active' : ''}`}
+          onClick={() => { setMode('signin'); setError(''); setNotice('') }}
+        >
+          Sign in
+        </button>
+        <button
+          className={`filter-chip${mode === 'signup' ? ' active' : ''}`}
+          onClick={() => { setMode('signup'); setError(''); setNotice('') }}
+        >
+          Create account
+        </button>
+        <button
+          className={`filter-chip${mode === 'link' ? ' active' : ''}`}
+          onClick={() => { setMode('link'); setError(''); setNotice('') }}
+        >
+          Email a link
+        </button>
+      </div>
+
       <label className="form-label">Email</label>
       <input
         className="form-input"
         type="email"
+        autoComplete="username"
         value={email}
         onChange={e => setEmail(e.target.value)}
         placeholder="you@example.com"
       />
+
+      {mode !== 'link' && (
+        <>
+          <label className="form-label" style={{ marginTop: 16 }}>Password</label>
+          <input
+            className="form-input"
+            type="password"
+            autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            placeholder="At least 6 characters"
+          />
+        </>
+      )}
+
       <div className="form-hint">
-        You will be sent a sign-in link. No password to remember.
+        {mode === 'link'
+          ? 'Sends a one-time link. Limited to a couple of emails an hour, and each link works once.'
+          : 'A password needs no email, so there is nothing to be rate limited.'}
       </div>
+
       {error && <div className="form-hint" style={{ color: 'var(--danger)' }}>{error}</div>}
+      {notice && <div className="form-hint">{notice}</div>}
+
       <button
         className="data-btn"
         style={{ marginTop: 12 }}
-        onClick={send}
-        disabled={state === 'sending' || !email.trim()}
+        onClick={submit}
+        disabled={state === 'working' || !email.trim() || (mode !== 'link' && password.length < 6)}
       >
-        {state === 'sending' ? 'Sending…' : 'Send link'}
+        {state === 'working'
+          ? 'Working…'
+          : mode === 'signin' ? 'Sign in' : mode === 'signup' ? 'Create account' : 'Send link'}
       </button>
     </div>
   )

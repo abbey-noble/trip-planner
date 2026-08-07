@@ -149,8 +149,8 @@ export default function App() {
     ? { backgroundImage: `url(${data.trip.coverImage})` }
     : undefined
 
-  // On a phone the card fills the screen, so the photo goes behind the
-  // masthead: it costs no extra height and still reads as a postcard front.
+  // The photo sits behind the masthead rather than in a strip of its own, so
+  // it costs no extra height at any width.
   const mastheadPhoto = data.trip.bannerImage || data.trip.coverImage
 
   // The stamp carries the destination, falling back to the trip name.
@@ -166,14 +166,8 @@ export default function App() {
 
         <div className="notebook">
           <div className="notebook-inner">
-          {data.trip.bannerImage && (
-            <div
-              className="banner"
-              style={{ backgroundImage: `url(${data.trip.bannerImage})` }}
-            />
-          )}
           <header
-            className={`masthead${data.trip.bannerImage ? ' has-banner' : ''}${mastheadPhoto ? ' has-photo' : ''}`}
+            className={`masthead${mastheadPhoto ? ' has-photo' : ''}`}
             style={mastheadPhoto ? { '--masthead-photo': `url(${mastheadPhoto})` } : undefined}
           >
             <div className="masthead-text">
