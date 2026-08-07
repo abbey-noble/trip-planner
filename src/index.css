@@ -1809,28 +1809,35 @@ textarea.form-input { resize: vertical; min-height: 62px; line-height: 1.55 }
 
 /* ============ Itinerary bar ============ */
 
-.itin-bar {
+
+
+
+
+
+
+/* A compact cluster rather than a full-width bar */
+.itin-foot {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  padding: clamp(10px, 1.6vw, 15px) var(--gutter);
-  border-bottom: 1px solid var(--rule);
-  flex-shrink: 0;
-  flex-wrap: wrap;
-}
-
-.itin-views { display: flex; gap: 20px }
-
-.itin-foot {
-  display: flex;
   justify-content: center;
-  gap: 20px;
-  padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom, 0px));
-  border-top: 1px solid var(--rule);
-  background: var(--page-warm);
-  flex-shrink: 0;
+  gap: 22px;
+  padding: 7px var(--gutter) calc(9px + env(safe-area-inset-bottom, 0px));
 }
+
+.itin-back {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-faint);
+  transition: color var(--t);
+}
+
+.itin-back:hover { color: var(--ink) }
 
 .itin-nav { display: flex; align-items: center; gap: 14px }
 
