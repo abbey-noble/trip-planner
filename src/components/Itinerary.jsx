@@ -3,18 +3,12 @@ import { useData } from '../App'
 import { generateId } from '../store'
 import {
   getDatesInRange, formatWeekday, formatDayMonth, formatDate,
-  timeToMinutes, formatTimeRange, toISODate,
+  timeToMinutes, toISODate,
 } from '../utils'
 import { TYPES, categoryLabel } from '../categories'
 import WeekAgenda from './WeekAgenda'
 import DayGrid from './DayGrid'
 
-const START_HOUR = 7
-const END_HOUR = 23
-const HOURS = Array.from(
-  { length: END_HOUR - START_HOUR + 1 },
-  (_, i) => `${String(START_HOUR + i).padStart(2, '0')}:00`
-)
 const WEEK_LENGTH = 7
 
 export default function Itinerary() {
@@ -202,15 +196,7 @@ export default function Itinerary() {
     )
   }
 
-  /* ---- Single day, narrow screens ---- */
-  const dayEntries = entriesByDate[currentDate] || []
-  const byHour = {}
-  for (const entry of dayEntries) {
-    const hour = `${entry.startTime.slice(0, 2)}:00`
-    ;(byHour[hour] ||= []).push(entry)
-  }
-  const beforeStart = dayEntries.filter(e => timeToMinutes(e.startTime) < START_HOUR * 60)
-
+  /* ---- Narrow screens: pick a day, then the same proportional grid ---- */
   return (
     <div className="itinerary">
       <div className="day-tabs">
@@ -227,37 +213,12 @@ export default function Itinerary() {
         ))}
       </div>
 
-      <div className="day-schedule">
-        {beforeStart.map(entry => (
-          <div key={entry.id} className="time-slot">
-            <div className="time-label">{entry.startTime}</div>
-            <div className="time-content">
-              <Entry entry={entry} onEdit={() => setEditing(entry)} onRemove={() => removeEntry(entry.id)} />
-            </div>
-          </div>
-        ))}
-
-        {HOURS.map(hour => (
-          <div key={hour} className="time-slot">
-            <div className="time-label">{hour}</div>
-            <div className="time-content">
-              {(byHour[hour] || []).map(entry => (
-                <Entry
-                  key={entry.id}
-                  entry={entry}
-                  onEdit={() => setEditing(entry)}
-                  onRemove={() => removeEntry(entry.id)}
-                />
-              ))}
-              <button
-                className="time-slot-empty"
-                aria-label={`Add at ${hour}`}
-                onClick={() => setEditing(blankEntry(currentDate, hour))}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
+      <DayGrid
+        date={currentDate}
+        entries={entriesByDate[currentDate] || []}
+        onAdd={(date, time) => setEditing(blankEntry(date, time))}
+        onEdit={setEditing}
+      />
 
       {editing && (
         <EntryEditor
@@ -268,24 +229,6 @@ export default function Itinerary() {
           onClose={() => setEditing(null)}
         />
       )}
-    </div>
-  )
-}
-
-function Entry({ entry, onEdit, onRemove }) {
-  const colour = TYPES[entry.type]?.color || 'var(--ink)'
-  return (
-    <div className="itinerary-item" style={{ '--item-color': colour }}>
-      <div className="itinerary-item-title">{entry.title}</div>
-      <div className="itinerary-item-time">
-        {formatTimeRange(entry.startTime, entry.endTime)}
-        {entry.type !== 'custom' && ` · ${TYPES[entry.type]?.label.replace(/s$/, '') || entry.type}`}
-      </div>
-      {entry.notes && <div className="itinerary-item-notes">{entry.notes}</div>}
-      <div className="itinerary-item-actions">
-        <button className="itinerary-item-btn" onClick={onEdit}>Edit</button>
-        <button className="itinerary-item-btn remove" onClick={onRemove}>Remove</button>
-      </div>
     </div>
   )
 }

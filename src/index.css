@@ -39,7 +39,7 @@
 
   /* Week grid: must match START_HOUR/END_HOUR in weekLayout.js */
   --hour-h: 54px;
-  --day-hour-h: 72px;
+  --day-hour-h: clamp(56px, 7vw, 76px);
   --hours: 19;
 
   /* A small fish follows the pointer. Ignored where SVG cursors are unsupported. */
@@ -1127,127 +1127,39 @@ svg { display: block; }
 
 .day-tab.has-items .day-tab-dot { opacity: 1 }
 
-.day-schedule {
-  flex: 1;
-  overflow-y: auto;
-  padding: 8px var(--gutter) max(72px, env(safe-area-inset-bottom, 0px));
-  -webkit-overflow-scrolling: touch;
-}
 
-.time-slot {
-  display: grid;
-  grid-template-columns: clamp(44px, 8vw, 56px) 1fr;
-  gap: clamp(10px, 2vw, 14px);
-  border-top: 1px solid var(--rule);
-  align-items: stretch;
-  min-height: 50px;
-}
 
-.time-slot:first-child { border-top: none }
 
-.time-label {
-  font-size: 11px;
-  color: var(--ink-faint);
-  padding-top: 14px;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.05em;
-}
 
-.time-content {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  padding: 7px 0;
-  min-width: 0;
-}
 
-.time-slot-empty {
-  flex: 1;
-  min-height: 36px;
-  border: none;
-  background: none;
-  border-radius: var(--radius);
-  transition: background var(--t);
-  position: relative;
-}
 
-.time-slot-empty::after {
-  content: '+';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
-  color: var(--ink-faint);
-  opacity: 0;
-  transition: opacity var(--t);
-}
 
-.time-slot-empty:hover { background: var(--wash) }
-.time-slot-empty:hover::after { opacity: 1; left: 10px }
 
-@media (hover: none) {
-  .time-slot-empty::after { opacity: 0.45; left: 10px }
-}
 
-.itinerary-item {
-  width: 100%;
-  padding: 12px 15px;
-  background: var(--surface);
-  border-radius: var(--radius);
-  border: 1px solid var(--rule);
-  border-left: 3px solid var(--item-color, var(--ink));
-  text-align: left;
-  position: relative;
-  min-width: 0;
-  box-shadow: 0 1px 3px rgba(31, 28, 24, 0.06);
-}
 
-.itinerary-item-title {
-  font-family: var(--serif);
-  font-size: clamp(16px, 2.6vw, 18px);
-  line-height: 1.25;
-  padding-right: 92px;
-  overflow-wrap: anywhere;
-}
 
-.itinerary-item-time {
-  font-size: 11.5px;
-  color: var(--ink-muted);
-  margin-top: 4px;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.04em;
-}
 
-.itinerary-item-notes {
-  font-size: 13px;
-  color: var(--ink-muted);
-  margin-top: 6px;
-  line-height: 1.5;
-}
 
-.itinerary-item-actions {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  display: flex;
-  gap: 10px;
-}
 
-.itinerary-item-btn {
-  background: none;
-  border: none;
-  font-size: 9.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.13em;
-  color: var(--ink-faint);
-  padding: 0;
-  transition: color var(--t);
-}
 
-.itinerary-item-btn:hover { color: var(--ink) }
-.itinerary-item-btn.remove:hover { color: var(--danger) }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ============ Modal ============ */
 
@@ -2107,7 +2019,7 @@ textarea.form-input { resize: vertical; min-height: 62px; line-height: 1.55 }
 
 .daygrid-inner {
   display: grid;
-  grid-template-columns: 66px minmax(0, 1fr);
+  grid-template-columns: clamp(48px, 9vw, 66px) minmax(0, 1fr);
   height: calc(var(--hours) * var(--day-hour-h));
   padding-right: var(--gutter);
 }
@@ -2161,7 +2073,7 @@ textarea.form-input { resize: vertical; min-height: 62px; line-height: 1.55 }
   z-index: 1;
   overflow: hidden;
   text-align: left;
-  padding: 6px 11px;
+  padding: 5px 10px;
   border: 1px solid var(--rule);
   border-left: 3px solid var(--entry-color);
   border-radius: var(--radius);
@@ -2188,7 +2100,7 @@ textarea.form-input { resize: vertical; min-height: 62px; line-height: 1.55 }
 
 .daygrid-entry-title {
   font-family: var(--serif);
-  font-size: 16px;
+  font-size: clamp(14px, 1.5vw, 16px);
   line-height: 1.2;
   overflow-wrap: anywhere;
 }
