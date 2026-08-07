@@ -3,7 +3,7 @@ import { useData } from '../App'
 import { generateId } from '../store'
 import { travelSummary } from '../utils'
 import { categoryLabel, TRAVEL_MODES } from '../categories'
-import { iconFor, TYPE_SLOT } from '../motifs'
+import { iconFor, TYPE_SLOT, Clock, Pin, Edit, Cross, LinkOut } from '../motifs'
 import LocationPicker from './LocationPicker'
 import ImageInput from './ImageInput'
 
@@ -122,29 +122,50 @@ export default function CollectionPage({
 
                 <div className="card-actions">
                   <button
-                    className={`item-action-btn${scheduledIds.has(item.id) ? ' scheduled' : ''}`}
+                    className={`icon-btn${scheduledIds.has(item.id) ? ' scheduled' : ''}`}
                     onClick={() => schedule({ ...item, type })}
+                    title={scheduledIds.has(item.id) ? 'Scheduled' : 'Schedule'}
+                    aria-label={scheduledIds.has(item.id) ? 'Scheduled' : 'Schedule'}
                   >
-                    {scheduledIds.has(item.id) ? 'Scheduled' : 'Schedule'}
+                    <Clock />
                   </button>
                   {item.coordinates && (
-                    <button className="item-action-btn" onClick={() => showOnMap(item)}>
-                      Map
+                    <button
+                      className="icon-btn"
+                      onClick={() => showOnMap(item)}
+                      title="Show on map"
+                      aria-label="Show on map"
+                    >
+                      <Pin />
                     </button>
                   )}
                   {item.url && (
-                    <a className="item-link" href={item.url} target="_blank" rel="noopener noreferrer">
-                      Link
+                    <a
+                      className="icon-btn"
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="Open link"
+                      aria-label="Open link"
+                    >
+                      <LinkOut />
                     </a>
                   )}
                   <button
-                    className="item-action-btn"
+                    className="icon-btn"
                     onClick={() => { setEditing(item); setShowForm(true) }}
+                    title="Edit"
+                    aria-label="Edit"
                   >
-                    Edit
+                    <Edit />
                   </button>
-                  <button className="item-action-btn delete" onClick={() => handleDelete(item.id)}>
-                    Delete
+                  <button
+                    className="icon-btn delete"
+                    onClick={() => handleDelete(item.id)}
+                    title="Delete"
+                    aria-label="Delete"
+                  >
+                    <Cross />
                   </button>
                 </div>
               </div>

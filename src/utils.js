@@ -49,13 +49,14 @@ function roundTo(n, step) {
 }
 
 /**
- * The line shown under an item: distance from the hotel, plus travel
+ * The line shown under an item: distance from the accommodation, plus travel
  * time when a mode is set. Manual travel time always wins over the estimate.
+ * Kept terse so it holds one line on a phone.
  */
 export function travelSummary(item, hotelCoords) {
   if (!item.coordinates || !hotelCoords) return ''
   const km = getDistance(hotelCoords, item.coordinates)
-  const parts = [`${formatDistance(km)} from hotel`]
+  const parts = [formatDistance(km)]
   const mode = travelMode(item.travelMode)
   if (mode) {
     const time = item.travelTime?.trim() || estimateTravelTime(km, item.travelMode)

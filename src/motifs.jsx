@@ -132,10 +132,10 @@ export function Boat(props) {
 export function Bags(props) {
   return (
     <svg viewBox="0 0 48 34" {...base} {...props}>
-      <path d="M4 13h17l-1.5 16h-14L4 13Z" />
-      <path d="M8.5 15v-3a4 4 0 0 1 8 0v3" />
-      <path d="M27 13h17l-1.5 16h-14L27 13Z" />
-      <path d="M31.5 15v-3a4 4 0 0 1 8 0v3" />
+      <path d="M4 13.5h16L18.6 30H5.4L4 13.5Z" />
+      <path d="M8.4 13.5V10a3.6 3.6 0 0 1 7.2 0v3.5" />
+      <path d="M28 13.5h16L42.6 30H29.4L28 13.5Z" />
+      <path d="M32.4 13.5V10a3.6 3.6 0 0 1 7.2 0v3.5" />
     </svg>
   )
 }
@@ -248,6 +248,55 @@ export function Notebook(props) {
       <path d="M12 4h21a3 3 0 0 1 3 3v30a3 3 0 0 1-3 3H12V4Z" />
       <path d="M12 10H7.5a2.5 2.5 0 1 1 0-5H12M12 19H7.5a2.5 2.5 0 1 1 0-5H12M12 28H7.5a2.5 2.5 0 1 1 0-5H12M12 37H7.5a2.5 2.5 0 1 1 0-5H12" />
       <path d="M18 13h12M18 20h12M18 27h12M18 34h8" />
+    </svg>
+  )
+}
+
+/* ------------------------------------------------------- interface icons */
+
+const ui = { ...base, strokeWidth: 1.7 }
+
+export function Clock(props) {
+  return (
+    <svg viewBox="0 0 24 24" {...ui} {...props}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5.5l3.5 2.5" />
+    </svg>
+  )
+}
+
+export function Pin(props) {
+  return (
+    <svg viewBox="0 0 24 24" {...ui} {...props}>
+      <path d="M12 21.5s7-6.4 7-11.5a7 7 0 1 0-14 0c0 5.1 7 11.5 7 11.5Z" />
+      <circle cx="12" cy="10" r="2.6" />
+    </svg>
+  )
+}
+
+export function Edit(props) {
+  return (
+    <svg viewBox="0 0 24 24" {...ui} {...props}>
+      <path d="M4 20.5 4.8 16 16 4.8 19.2 8 8 19.2 4 20.5Z" />
+      <path d="M14.5 6.3 17.7 9.5" />
+    </svg>
+  )
+}
+
+export function Cross(props) {
+  return (
+    <svg viewBox="0 0 24 24" {...ui} {...props}>
+      <path d="M6 6l12 12M18 6 6 18" />
+    </svg>
+  )
+}
+
+export function LinkOut(props) {
+  return (
+    <svg viewBox="0 0 24 24" {...ui} {...props}>
+      <path d="M14 4h6v6" />
+      <path d="M20 4 11 13" />
+      <path d="M18 14.5V19a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 19V8a1.5 1.5 0 0 1 1.5-1.5H10" />
     </svg>
   )
 }
