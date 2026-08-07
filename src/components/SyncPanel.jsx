@@ -27,7 +27,7 @@ export default function SyncPanel() {
         <div className="location-selected">
           <span className="location-selected-name">{config.url.replace(/^https?:\/\//, '')}</span>
           {config.fromEnv ? (
-            <span className="location-selected-coords">from .env.local</span>
+            <span className="location-selected-coords">connected</span>
           ) : (
             <button
               className="location-clear"
@@ -50,7 +50,7 @@ export default function SyncPanel() {
               <button className="location-clear" onClick={() => signOut()}>Sign out</button>
             </div>
             <div className="form-hint">
-              Changes save to this device first, then go to the server.
+              Works offline. Changes sync when you are back online.
             </div>
           </div>
 
@@ -127,11 +127,7 @@ function SignInForm() {
       } else if (mode === 'signup') {
         const { needsConfirmation } = await signUpWithPassword(email, password)
         if (needsConfirmation) {
-          setNotice(
-            'Account created, but the project still requires email confirmation. '
-            + 'Turn off "Confirm email" in Supabase under Authentication → Sign In / Providers, '
-            + 'then sign in here.'
-          )
+          setNotice('Account created. Confirm it from the email just sent, then sign in.')
         }
       } else {
         await signIn(email)
@@ -191,11 +187,9 @@ function SignInForm() {
         </>
       )}
 
-      <div className="form-hint">
-        {mode === 'link'
-          ? 'Sends a one-time link. Limited to a couple of emails an hour, and each link works once.'
-          : 'A password needs no email, so there is nothing to be rate limited.'}
-      </div>
+      {mode === 'link' && (
+        <div className="form-hint">The link works once. Open it on this device.</div>
+      )}
 
       {error && <div className="form-hint" style={{ color: 'var(--danger)' }}>{error}</div>}
       {notice && <div className="form-hint">{notice}</div>}
