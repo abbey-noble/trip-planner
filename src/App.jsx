@@ -149,6 +149,10 @@ export default function App() {
     ? { backgroundImage: `url(${data.trip.coverImage})` }
     : undefined
 
+  // On a phone the card fills the screen, so the photo goes behind the
+  // masthead: it costs no extra height and still reads as a postcard front.
+  const mastheadPhoto = data.trip.bannerImage || data.trip.coverImage
+
   // The stamp carries the destination, falling back to the trip name.
   const stampLabel = (data.trip.location?.split(',')[0] || data.trip.name || 'Travels')
     .trim()
@@ -168,7 +172,10 @@ export default function App() {
               style={{ backgroundImage: `url(${data.trip.bannerImage})` }}
             />
           )}
-          <header className={`masthead${data.trip.bannerImage ? ' has-banner' : ''}`}>
+          <header
+            className={`masthead${data.trip.bannerImage ? ' has-banner' : ''}${mastheadPhoto ? ' has-photo' : ''}`}
+            style={mastheadPhoto ? { '--masthead-photo': `url(${mastheadPhoto})` } : undefined}
+          >
             <div className="masthead-text">
               <span className="masthead-eyebrow">Postcard from</span>
               <h1 className="header-title">{data.trip.name || 'Trip Planner'}</h1>
