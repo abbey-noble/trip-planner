@@ -1650,12 +1650,13 @@ textarea.form-input { resize: vertical; min-height: 62px; line-height: 1.55 }
 .icon-grid {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
+  align-items: start;
   gap: 5px;
 }
 
 .icon-col {
-  display: grid;
-  grid-template-rows: auto repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 5px;
   min-width: 0;
 }
@@ -1679,7 +1680,9 @@ textarea.form-input { resize: vertical; min-height: 62px; line-height: 1.55 }
   justify-content: center;
   aspect-ratio: 1;
   width: 100%;
-  padding: 18%;
+  height: auto;
+  flex: none;
+  padding: 17%;
   background: var(--surface);
   border: 1px solid var(--rule);
   border-radius: var(--radius);

@@ -177,9 +177,12 @@ export function Shell(props) {
 export function Flower(props) {
   return (
     <svg viewBox="0 0 40 40" {...base} {...props}>
-      <circle cx="20" cy="20" r="4" />
-      <path d="M20 16c-1.5-5 0-9 0-9s1.5 4 0 9ZM24 20c5-1.5 9 0 9 0s-4 1.5-9 0ZM20 24c1.5 5 0 9 0 9s-1.5-4 0-9ZM16 20c-5 1.5-9 0-9 0s4-1.5 9 0Z" />
-      <path d="M23 17c4-3.5 8-4 8-4s-.5 4-4 8M17 23c-4 3.5-8 4-8 4s.5-4 4-8" />
+      <ellipse cx="20" cy="11" rx="4.3" ry="6" />
+      <ellipse cx="28.6" cy="17.2" rx="4.3" ry="6" transform="rotate(72 28.6 17.2)" />
+      <ellipse cx="25.3" cy="27.3" rx="4.3" ry="6" transform="rotate(144 25.3 27.3)" />
+      <ellipse cx="14.7" cy="27.3" rx="4.3" ry="6" transform="rotate(216 14.7 27.3)" />
+      <ellipse cx="11.4" cy="17.2" rx="4.3" ry="6" transform="rotate(288 11.4 17.2)" />
+      <circle cx="20" cy="20" r="3.6" />
     </svg>
   )
 }
