@@ -2122,12 +2122,21 @@ textarea.form-input { resize: vertical; min-height: 62px; line-height: 1.55 }
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(rgba(22, 20, 17, 0.28), rgba(22, 20, 17, 0.66));
+      /* Light enough to keep the photo, graded so the text at the foot
+       still has something to sit against. */
+    background: linear-gradient(
+      rgba(22, 20, 17, 0.06) 0%,
+      rgba(22, 20, 17, 0.18) 45%,
+      rgba(22, 20, 17, 0.46) 100%
+    );
   }
 
   .masthead.has-photo > * { position: relative; z-index: 1 }
 
-  .masthead.has-photo .masthead-eyebrow { color: rgba(252, 250, 245, 0.75) }
+  .masthead.has-photo .masthead-eyebrow {
+    color: rgba(252, 250, 245, 0.88);
+    text-shadow: 0 1px 3px rgba(18, 16, 12, 0.55);
+  }
 
   .masthead.has-photo .header-title {
       color: #FCFAF5;
@@ -2142,7 +2151,8 @@ textarea.form-input { resize: vertical; min-height: 62px; line-height: 1.55 }
   .masthead.has-photo .header-btn {
       color: #FCFAF5;
       border-color: rgba(252, 250, 245, 0.55);
-      background: rgba(22, 20, 17, 0.22);
+      background: rgba(22, 20, 17, 0.3);
+    backdrop-filter: blur(3px);
   }
 
   .masthead.has-photo .header-btn:hover { color: #fff; border-color: #fff }
