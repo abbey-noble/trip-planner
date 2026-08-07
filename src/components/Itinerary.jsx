@@ -2,12 +2,12 @@ import React, { useState, useMemo, useEffect } from 'react'
 import { useData } from '../App'
 import { generateId } from '../store'
 import {
-  getDatesInRange, formatWeekday, formatDayMonth, formatDate,
-  timeToMinutes, toISODate,
+  getDatesInRange, formatDate, timeToMinutes, toISODate,
 } from '../utils'
 import { TYPES, categoryLabel } from '../categories'
 import WeekAgenda from './WeekAgenda'
 import DayGrid from './DayGrid'
+import WeekBlocks from './WeekBlocks'
 
 const WEEK_LENGTH = 7
 
@@ -99,41 +99,80 @@ export default function Itinerary() {
     />
   )
 
-  /* ---- Narrow screens: pick a day, then the grid ---- */
+  const week = weeks[Math.min(weekIndex, weeks.length - 1)] || []
+  const dayIndex = dates.indexOf(currentDate)
+  const showFoot = view === 'day' || weeks.length > 1
+
+  const nav = showFoot && (
+    <div className="itin-foot">
+      {view === 'day' && (
+        <button className="itin-back" onClick={() => setView('week')}>
+          All week
+        </button>
+      )}
+
+      <div className="itin-nav">
+        <button
+          className="itin-nav-btn"
+          onClick={() => view === 'day'
+            ? setActiveDate(dates[Math.max(0, dayIndex - 1)])
+            : setWeekIndex(i => Math.max(0, i - 1))}
+          disabled={view === 'day' ? dayIndex <= 0 : weekIndex === 0}
+          aria-label={view === 'day' ? 'Previous day' : 'Previous week'}
+        >
+          &#8592;
+        </button>
+
+        <span className="itin-nav-label">
+          {view === 'day'
+            ? formatDate(currentDate)
+            : `${formatDate(week[0])} \u2013 ${formatDate(week[week.length - 1])}`}
+        </span>
+
+        <button
+          className="itin-nav-btn"
+          onClick={() => view === 'day'
+            ? setActiveDate(dates[Math.min(dates.length - 1, dayIndex + 1)])
+            : setWeekIndex(i => Math.min(weeks.length - 1, i + 1))}
+          disabled={view === 'day'
+            ? dayIndex === dates.length - 1
+            : weekIndex >= weeks.length - 1}
+          aria-label={view === 'day' ? 'Next day' : 'Next week'}
+        >
+          &#8594;
+        </button>
+      </div>
+    </div>
+  )
+
+  const openDay = (date) => { setActiveDate(date); setView('day') }
+
+  /* ---- Narrow screens: the week as blocks, or one day on the grid ---- */
   if (!isWide) {
     return (
       <div className="itinerary">
-        <div className="day-tabs">
-          {dates.map(date => (
-            <button
-              key={date}
-              className={`day-tab${currentDate === date ? ' active' : ''}${entriesByDate[date] ? ' has-items' : ''}`}
-              onClick={() => setActiveDate(date)}
-            >
-              <span className="day-tab-day">{formatWeekday(date)}</span>
-              <span className="day-tab-date">{formatDayMonth(date)}</span>
-              <span className="day-tab-dot" />
-            </button>
-          ))}
-        </div>
-
-        <DayGrid
-          date={currentDate}
-          entries={entriesByDate[currentDate] || []}
-          onAdd={addAt}
-          onEdit={setEditing}
-        />
-
+        {view === 'week' ? (
+          <WeekBlocks
+            days={week}
+            entriesByDate={entriesByDate}
+            today={today}
+            onOpenDay={openDay}
+          />
+        ) : (
+          <DayGrid
+            date={currentDate}
+            entries={entriesByDate[currentDate] || []}
+            onAdd={addAt}
+            onEdit={setEditing}
+          />
+        )}
+        {nav}
         {editor}
       </div>
     )
   }
 
-  /* ---- Wide screens: the week, or one day once you open it ---- */
-  const week = weeks[Math.min(weekIndex, weeks.length - 1)] || []
-  const dayIndex = dates.indexOf(currentDate)
-  const showFoot = view === 'day' || weeks.length > 1
-
+  /* ---- Wide screens: the week as an agenda, or one day on the grid ---- */
   return (
     <div className="itinerary">
       {view === 'week' ? (
@@ -143,7 +182,7 @@ export default function Itinerary() {
           today={today}
           onAdd={addAt}
           onEdit={setEditing}
-          onOpenDay={(date) => { setActiveDate(date); setView('day') }}
+          onOpenDay={openDay}
         />
       ) : (
         <DayGrid
@@ -154,47 +193,7 @@ export default function Itinerary() {
         />
       )}
 
-      {showFoot && (
-        <div className="itin-foot">
-          {view === 'day' && (
-            <button className="itin-back" onClick={() => setView('week')}>
-              All week
-            </button>
-          )}
-
-          <div className="itin-nav">
-            <button
-              className="itin-nav-btn"
-              onClick={() => view === 'day'
-                ? setActiveDate(dates[Math.max(0, dayIndex - 1)])
-                : setWeekIndex(i => Math.max(0, i - 1))}
-              disabled={view === 'day' ? dayIndex <= 0 : weekIndex === 0}
-              aria-label={view === 'day' ? 'Previous day' : 'Previous week'}
-            >
-              &#8592;
-            </button>
-
-            <span className="itin-nav-label">
-              {view === 'day'
-                ? formatDate(currentDate)
-                : `${formatDate(week[0])} \u2013 ${formatDate(week[week.length - 1])}`}
-            </span>
-
-            <button
-              className="itin-nav-btn"
-              onClick={() => view === 'day'
-                ? setActiveDate(dates[Math.min(dates.length - 1, dayIndex + 1)])
-                : setWeekIndex(i => Math.min(weeks.length - 1, i + 1))}
-              disabled={view === 'day'
-                ? dayIndex === dates.length - 1
-                : weekIndex >= weeks.length - 1}
-              aria-label={view === 'day' ? 'Next day' : 'Next week'}
-            >
-              &#8594;
-            </button>
-          </div>
-        </div>
-      )}
+      {nav}
 
       {editor}
     </div>
