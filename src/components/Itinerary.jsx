@@ -77,12 +77,54 @@ export default function Itinerary() {
     isNew: true,
   })
 
+  const addAt = (date, time) => setEditing(blankEntry(date, time))
+
   if (dates.length === 0) {
     return (
       <div className="page">
         <div className="empty-state">
           Set the trip dates under Trip to build the itinerary.
         </div>
+      </div>
+    )
+  }
+
+  const editor = editing && (
+    <EntryEditor
+      entry={editing}
+      data={data}
+      onSave={saveEntry}
+      onRemove={removeEntry}
+      onClose={() => setEditing(null)}
+    />
+  )
+
+  /* ---- Narrow screens: pick a day, then the grid ---- */
+  if (!isWide) {
+    return (
+      <div className="itinerary">
+        <div className="day-tabs">
+          {dates.map(date => (
+            <button
+              key={date}
+              className={`day-tab${currentDate === date ? ' active' : ''}${entriesByDate[date] ? ' has-items' : ''}`}
+              onClick={() => setActiveDate(date)}
+            >
+              <span className="day-tab-day">{formatWeekday(date)}</span>
+              <span className="day-tab-date">{formatDayMonth(date)}</span>
+              <span className="day-tab-dot" />
+            </button>
+          ))}
+        </div>
+
+        <DayGrid
+          date={currentDate}
+          entries={entriesByDate[currentDate] || []}
+          onAdd={addAt}
+          onEdit={setEditing}
+        />
+
+        {editor}
       </div>
     )
   }

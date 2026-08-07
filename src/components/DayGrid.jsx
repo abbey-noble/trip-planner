@@ -20,7 +20,8 @@ export default function DayGrid({ date, entries, onAdd, onEdit }) {
       ? Math.min(...placed.map(p => p.top))
       : ((9 * 60 - DAY_START) / DAY_MINUTES) * 100
     el.scrollTop = Math.max(0, (first / 100) * el.scrollHeight - 24)
-  }, [date]) // eslint-disable-line react-hooks/exhaustive-deps
+    // Re-frames only when the day changes, not on every edit.
+  }, [date])
 
   const handleBackgroundClick = (e) => {
     const rect = e.currentTarget.getBoundingClientRect()
