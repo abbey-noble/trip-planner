@@ -69,14 +69,13 @@ export function Mountain(props) {
   )
 }
 
-export function Island(props) {
+export function ScrollMap(props) {
   return (
     <svg viewBox="0 0 48 36" {...base} {...props}>
-      <path d="M3 31c4 0 4 3 8 3s4-3 8-3 4 3 8 3 4-3 8-3 4 3 8 3" />
-      <path d="M12 26c0-3.5 5.5-5.5 12-5.5S36 22.5 36 26" />
-      <path d="M24 21V8" />
-      <path d="M24 8c-5.5-2.5-9 0-10 3.5 3.5-2.5 7-2.5 10 0" />
-      <path d="M24 8c5.5-2.5 9 0 10 3.5-3.5-2.5-7-2.5-10 0" />
+      <path d="M5 8c4-2.5 8-2.5 12 0s8 2.5 12 0 8-2.5 12 0v20c-4-2.5-8-2.5-12 0s-8 2.5-12 0-8-2.5-12 0V8Z" />
+      <path d="M13 25c2-7 5.5-9.5 9.5-7.5S30 15 32 10" strokeDasharray="2.5 3.5" />
+      <path d="M30 8.5 34 13M34 8.5 30 13" />
+      <circle cx="13" cy="25" r="1.3" fill="currentColor" stroke="none" />
     </svg>
   )
 }
@@ -130,44 +129,47 @@ export function Boat(props) {
   )
 }
 
-export function ShoppingBag(props) {
+export function Bags(props) {
   return (
-    <svg viewBox="0 0 36 40" {...base} {...props}>
-      <path d="M5 12h26l-2.5 25h-21L5 12Z" />
-      <path d="M12 16V9a6 6 0 0 1 12 0v7" />
+    <svg viewBox="0 0 48 34" {...base} {...props}>
+      <path d="M4 13h17l-1.5 16h-14L4 13Z" />
+      <path d="M8.5 15v-3a4 4 0 0 1 8 0v3" />
+      <path d="M27 13h17l-1.5 16h-14L27 13Z" />
+      <path d="M31.5 15v-3a4 4 0 0 1 8 0v3" />
     </svg>
   )
 }
 
-export function Camera(props) {
+export function Music(props) {
   return (
-    <svg viewBox="0 0 46 38" {...base} {...props}>
-      <path d="M4 11h8l3-4h16l3 4h8a2 2 0 0 1 2 2v18a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V13a2 2 0 0 1 2-2Z" />
-      <circle cx="23" cy="22" r="7.5" />
-      <circle cx="23" cy="22" r="3" />
-      <path d="M37 15h.01" />
+    <svg viewBox="0 0 40 40" {...base} {...props}>
+      <path d="M14 30V9l20-5v21" />
+      <path d="M14 14.5 34 9.5" />
+      <ellipse cx="9.5" cy="30.5" rx="4.8" ry="3.6" transform="rotate(-16 9.5 30.5)" />
+      <ellipse cx="29.5" cy="25.5" rx="4.8" ry="3.6" transform="rotate(-16 29.5 25.5)" />
     </svg>
   )
 }
 
 /* ------------------------------------------------------------------ see */
 
+export function Camera(props) {
+  return (
+    <svg viewBox="0 0 46 36" {...base} {...props}>
+      <rect x="3" y="9" width="40" height="24" rx="3.5" />
+      <path d="M16 9l2.5-4.5h9L30 9" />
+      <circle cx="23" cy="21" r="7.5" />
+      <circle cx="23" cy="21" r="3.4" />
+      <rect x="33" y="13" width="5.5" height="4" rx="1.2" />
+    </svg>
+  )
+}
+
 export function Shell(props) {
   return (
     <svg viewBox="0 0 48 34" {...base} {...props}>
       <path d="M24 31C10.5 31 4 21.5 6 12 10 3.5 38 3.5 42 12c2 9.5-4.5 19-18 19Z" />
       <path d="M24 31 8.5 12M24 31 15.5 7M24 31V6M24 31l8.5-24M24 31l15.5-19" />
-    </svg>
-  )
-}
-
-export function Torii(props) {
-  return (
-    <svg viewBox="0 0 48 38" {...base} {...props}>
-      <path d="M3 8c14-2.5 28-2.5 42 0l-3 4.5c-12-2-24-2-36 0L3 8Z" />
-      <path d="M9 17c10-1.5 20-1.5 30 0" />
-      <path d="M13 12v22M35 12v22" />
-      <path d="M9 34h8M31 34h8" />
     </svg>
   )
 }
@@ -237,14 +239,12 @@ export function Dog(props) {
   )
 }
 
-export function Paw(props) {
+export function Notebook(props) {
   return (
-    <svg viewBox="0 0 44 42" {...base} {...props}>
-      <ellipse cx="11" cy="17" rx="4" ry="5" transform="rotate(-20 11 17)" />
-      <ellipse cx="20" cy="11" rx="4" ry="5.2" />
-      <ellipse cx="29.5" cy="13" rx="4" ry="5.2" transform="rotate(16 29.5 13)" />
-      <ellipse cx="37" cy="21" rx="3.6" ry="4.6" transform="rotate(34 37 21)" />
-      <path d="M22 22c6.5 0 11 4.5 11 9.5 0 4.2-3.8 6.5-8 6.5h-6c-4.2 0-8-2.3-8-6.5C11 26.5 15.5 22 22 22Z" />
+    <svg viewBox="0 0 40 44" {...base} {...props}>
+      <path d="M12 4h21a3 3 0 0 1 3 3v30a3 3 0 0 1-3 3H12V4Z" />
+      <path d="M12 10H7.5a2.5 2.5 0 1 1 0-5H12M12 19H7.5a2.5 2.5 0 1 1 0-5H12M12 28H7.5a2.5 2.5 0 1 1 0-5H12M12 37H7.5a2.5 2.5 0 1 1 0-5H12" />
+      <path d="M18 13h12M18 20h12M18 27h12M18 34h8" />
     </svg>
   )
 }
@@ -260,7 +260,7 @@ export const ICON_SETS = {
   map: [
     { id: 'wave', label: 'Waves', Icon: Wave },
     { id: 'mountain', label: 'Mountains', Icon: Mountain },
-    { id: 'island', label: 'Island', Icon: Island },
+    { id: 'scroll', label: 'Map scroll', Icon: ScrollMap },
   ],
   restaurants: [
     { id: 'olive', label: 'Olives', Icon: Olive },
@@ -269,12 +269,12 @@ export const ICON_SETS = {
   ],
   experiences: [
     { id: 'boat', label: 'Boat', Icon: Boat },
-    { id: 'bag', label: 'Shopping', Icon: ShoppingBag },
-    { id: 'camera', label: 'Camera', Icon: Camera },
+    { id: 'bag', label: 'Shopping', Icon: Bags },
+    { id: 'music', label: 'Music', Icon: Music },
   ],
   locations: [
     { id: 'shell', label: 'Shell', Icon: Shell },
-    { id: 'torii', label: 'Torii gate', Icon: Torii },
+    { id: 'camera', label: 'Camera', Icon: Camera },
     { id: 'flower', label: 'Flower', Icon: Flower },
   ],
   board: [
@@ -285,7 +285,7 @@ export const ICON_SETS = {
   itinerary: [
     { id: 'cat', label: 'Cat', Icon: Cat },
     { id: 'dog', label: 'Dog', Icon: Dog },
-    { id: 'paw', label: 'Paw print', Icon: Paw },
+    { id: 'notebook', label: 'Notebook', Icon: Notebook },
   ],
 }
 
