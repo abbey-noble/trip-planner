@@ -31,20 +31,19 @@ export function Fish(props) {
 export function PaperPlane(props) {
   return (
     <svg viewBox="0 0 48 32" {...base} {...props}>
-      <path d="M44 4 4 18l14 4 4 8 6-9" />
-      <path d="M44 4 18 22" />
-      <path d="M44 4 28 30l-6-8" />
+      <path d="M4 4 44 18l-14 4-4 8-6-9" />
+      <path d="M4 4 30 22" />
+      <path d="M4 4 20 30l6-8" />
     </svg>
   )
 }
 
-export function Balloon(props) {
+export function Pencil(props) {
   return (
-    <svg viewBox="0 0 36 44" {...base} {...props}>
-      <path d="M18 3c7 0 12 5.4 12 12 0 6.5-5.6 12.4-9 16h-6c-3.4-3.6-9-9.5-9-16C6 8.4 11 3 18 3Z" />
-      <path d="M18 3c-3.6 4-5.2 9-5.2 12s1.6 8 5.2 12M18 3c3.6 4 5.2 9 5.2 12s-1.6 8-5.2 12" />
-      <path d="M14 33h8l-1 5h-6l-1-5Z" />
-      <path d="M15 38v3M21 38v3M15 41h6" />
+    <svg viewBox="0 0 40 40" {...base} {...props}>
+      <path d="M6.5 33.5 9 26 27 8l5 5-18 18-7.5 2.5Z" />
+      <path d="M25 10l5 5" />
+      <path d="M9 26l5 5" />
     </svg>
   )
 }
@@ -70,12 +69,14 @@ export function Mountain(props) {
   )
 }
 
-export function Compass(props) {
+export function Island(props) {
   return (
-    <svg viewBox="0 0 40 40" {...base} {...props}>
-      <circle cx="20" cy="20" r="16" />
-      <path d="m27 13-5 9-9 5 5-9 9-5Z" />
-      <circle cx="20" cy="20" r="1.2" fill="currentColor" stroke="none" />
+    <svg viewBox="0 0 48 36" {...base} {...props}>
+      <path d="M3 31c4 0 4 3 8 3s4-3 8-3 4 3 8 3 4-3 8-3 4 3 8 3" />
+      <path d="M12 26c0-3.5 5.5-5.5 12-5.5S36 22.5 36 26" />
+      <path d="M24 21V8" />
+      <path d="M24 8c-5.5-2.5-9 0-10 3.5 3.5-2.5 7-2.5 10 0" />
+      <path d="M24 8c5.5-2.5 9 0 10 3.5-3.5-2.5-7-2.5-10 0" />
     </svg>
   )
 }
@@ -94,24 +95,24 @@ export function Olive(props) {
   )
 }
 
-export function Cherries(props) {
+export function Strawberry(props) {
   return (
     <svg viewBox="0 0 40 40" {...base} {...props}>
-      <path d="M14 28c0-8 4-14 12-20M26 28c0-9 2-14 0-20" />
-      <path d="M26 8c4-2.5 8-2.5 11 0-3 2.5-7 2.8-11 0Z" />
-      <circle cx="11" cy="31" r="6" />
-      <circle cx="29" cy="31" r="6" />
+      <path d="M20 13c8 0 13 4.5 13 10 0 6.5-7 14-13 14S7 29.5 7 23c0-5.5 5-10 13-10Z" />
+      <path d="M20 13V6" />
+      <path d="M20 12c-3.5-3.5-8-4-11-2.5 2 3 5.5 4.5 11 4.5M20 12c3.5-3.5 8-4 11-2.5-2 3-5.5 4.5-11 4.5" />
+      <path d="M16 21h.01M24 21h.01M20 26h.01M13.5 27h.01M26.5 27h.01" />
     </svg>
   )
 }
 
-export function Noodles(props) {
+export function Coffee(props) {
   return (
-    <svg viewBox="0 0 48 36" {...base} {...props}>
-      <path d="M6 16h30c0 8-6.5 14-15 14S6 24 6 16Z" />
-      <path d="M3 16h36" />
-      <path d="M14 11c0-3 2-4 2-6M22 10c0-3 2-4 2-6M30 11c0-3 2-4 2-6" />
-      <path d="M38 14 46 6" />
+    <svg viewBox="0 0 44 40" {...base} {...props}>
+      <path d="M7 14h24v9c0 6-5.5 10-12 10s-12-4-12-10v-9Z" />
+      <path d="M31 17h4a4.5 4.5 0 0 1 0 9h-4" />
+      <path d="M3 36h32" />
+      <path d="M15 9c0-2.5 2-3 2-5.5M23 9c0-2.5 2-3 2-5.5" />
     </svg>
   )
 }
@@ -138,12 +139,13 @@ export function ShoppingBag(props) {
   )
 }
 
-export function Snorkel(props) {
+export function Camera(props) {
   return (
-    <svg viewBox="0 0 48 34" {...base} {...props}>
-      <path d="M8 9h26v10c0 5-4 8-8.5 8S17 24 17 19v-2h-2v2c0 5-3.5 8-8 8S-.5 24 4 19" />
-      <path d="M8 9c0-2.5 1.5-4 4-4h18c2.5 0 4 1.5 4 4" />
-      <path d="M38 5v18a5 5 0 0 1-5 5" />
+    <svg viewBox="0 0 46 38" {...base} {...props}>
+      <path d="M4 11h8l3-4h16l3 4h8a2 2 0 0 1 2 2v18a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V13a2 2 0 0 1 2-2Z" />
+      <circle cx="23" cy="22" r="7.5" />
+      <circle cx="23" cy="22" r="3" />
+      <path d="M37 15h.01" />
     </svg>
   )
 }
@@ -159,12 +161,13 @@ export function Shell(props) {
   )
 }
 
-export function Temple(props) {
+export function Torii(props) {
   return (
-    <svg viewBox="0 0 48 36" {...base} {...props}>
-      <path d="M24 3 4 13h40L24 3Z" />
-      <path d="M8 13v17M18 13v17M30 13v17M40 13v17" />
-      <path d="M3 30h42M6 33h36" />
+    <svg viewBox="0 0 48 38" {...base} {...props}>
+      <path d="M3 8c14-2.5 28-2.5 42 0l-3 4.5c-12-2-24-2-36 0L3 8Z" />
+      <path d="M9 17c10-1.5 20-1.5 30 0" />
+      <path d="M13 12v22M35 12v22" />
+      <path d="M9 34h8M31 34h8" />
     </svg>
   )
 }
@@ -193,7 +196,7 @@ export function Sun(props) {
 export function Moon(props) {
   return (
     <svg viewBox="0 0 40 40" {...base} {...props}>
-      <path d="M31 24.5A14 14 0 0 1 15.5 9a14 14 0 1 0 15.5 15.5Z" />
+      <path d="M23.5 5.5a14.5 14.5 0 1 0 10.5 24.8A11.6 11.6 0 0 1 23.5 5.5Z" />
     </svg>
   )
 }
@@ -234,15 +237,14 @@ export function Dog(props) {
   )
 }
 
-export function Rabbit(props) {
+export function Paw(props) {
   return (
-    <svg viewBox="0 0 48 44" {...base} {...props}>
-      <path d="M19 16c-2.5-4-4.5-9-3.5-12.5S21 5 22 12M29 16c2.5-4 4.5-9 3.5-12.5S27 5 26 12" />
-      <path d="M17 22c0-4.5 3-7.5 7-7.5s7 3 7 7.5-3 7.5-7 7.5-7-3-7-7.5Z" />
-      <path d="M21.5 21h.01M26.5 21h.01" />
-      <path d="M24 24v1.5M22.5 27h3" />
-      <path d="M18 29c-2.5 2.5-4 6-4 10h20c0-4-1.5-7.5-4-10" />
-      <circle cx="35" cy="35" r="3.5" />
+    <svg viewBox="0 0 44 42" {...base} {...props}>
+      <ellipse cx="11" cy="17" rx="4" ry="5" transform="rotate(-20 11 17)" />
+      <ellipse cx="20" cy="11" rx="4" ry="5.2" />
+      <ellipse cx="29.5" cy="13" rx="4" ry="5.2" transform="rotate(16 29.5 13)" />
+      <ellipse cx="37" cy="21" rx="3.6" ry="4.6" transform="rotate(34 37 21)" />
+      <path d="M22 22c6.5 0 11 4.5 11 9.5 0 4.2-3.8 6.5-8 6.5h-6c-4.2 0-8-2.3-8-6.5C11 26.5 15.5 22 22 22Z" />
     </svg>
   )
 }
@@ -252,27 +254,27 @@ export function Rabbit(props) {
 export const ICON_SETS = {
   cursor: [
     { id: 'fish', label: 'Fish', Icon: Fish },
-    { id: 'plane', label: 'Paper plane', Icon: PaperPlane },
-    { id: 'balloon', label: 'Balloon', Icon: Balloon },
+    { id: 'plane', label: 'Plane', Icon: PaperPlane },
+    { id: 'pencil', label: 'Pencil', Icon: Pencil },
   ],
   map: [
     { id: 'wave', label: 'Waves', Icon: Wave },
-    { id: 'mountain', label: 'Mountain', Icon: Mountain },
-    { id: 'compass', label: 'Compass', Icon: Compass },
+    { id: 'mountain', label: 'Mountains', Icon: Mountain },
+    { id: 'island', label: 'Island', Icon: Island },
   ],
   restaurants: [
     { id: 'olive', label: 'Olives', Icon: Olive },
-    { id: 'cherries', label: 'Cherries', Icon: Cherries },
-    { id: 'noodles', label: 'Noodles', Icon: Noodles },
+    { id: 'strawberry', label: 'Strawberry', Icon: Strawberry },
+    { id: 'coffee', label: 'Coffee', Icon: Coffee },
   ],
   experiences: [
     { id: 'boat', label: 'Boat', Icon: Boat },
     { id: 'bag', label: 'Shopping', Icon: ShoppingBag },
-    { id: 'snorkel', label: 'Snorkel', Icon: Snorkel },
+    { id: 'camera', label: 'Camera', Icon: Camera },
   ],
   locations: [
     { id: 'shell', label: 'Shell', Icon: Shell },
-    { id: 'temple', label: 'Temple', Icon: Temple },
+    { id: 'torii', label: 'Torii gate', Icon: Torii },
     { id: 'flower', label: 'Flower', Icon: Flower },
   ],
   board: [
@@ -283,7 +285,7 @@ export const ICON_SETS = {
   itinerary: [
     { id: 'cat', label: 'Cat', Icon: Cat },
     { id: 'dog', label: 'Dog', Icon: Dog },
-    { id: 'rabbit', label: 'Rabbit', Icon: Rabbit },
+    { id: 'paw', label: 'Paw print', Icon: Paw },
   ],
 }
 
@@ -293,8 +295,8 @@ export const ICON_SLOTS = [
   { key: 'restaurants', label: 'Eat' },
   { key: 'experiences', label: 'Do' },
   { key: 'locations', label: 'See' },
-  { key: 'board', label: 'Inspiration' },
-  { key: 'itinerary', label: 'Itinerary' },
+  { key: 'board', label: 'Ideas' },
+  { key: 'itinerary', label: 'Days' },
 ]
 
 export const DEFAULT_ICONS = Object.fromEntries(
@@ -316,17 +318,25 @@ export const TYPE_SLOT = {
 
 /* --------------------------------------------------------------- pointer */
 
-// Kept simple and chunky: a pointer is rendered at about 28px.
-const CURSOR_PATHS = {
-  fish: "%3Cpath d='M4 16c0-5.2 6-9.2 13-9.2s13 4 13 9.2-6 9.2-13 9.2S4 21.2 4 16Z'/%3E%3Cpath d='M30 16l12-7v14l-12-7Z'/%3E",
-  plane: "%3Cpath d='M44 4 4 18l14 4 4 8 6-9'/%3E%3Cpath d='M44 4 28 30l-6-8'/%3E",
-  balloon: "%3Cpath d='M24 4c8 0 13 6 13 13 0 7-6 13-9 17h-8c-3-4-9-10-9-17 0-7 5-13 13-13Z'/%3E%3Cpath d='M20 34h8l-1 5h-6l-1-5Z'/%3E",
+// Stripped back: a pointer is only about 28px across.
+const CURSORS = {
+  fish: {
+    box: '0 0 48 32',
+    d: "%3Cpath d='M4 16c0-5.2 6-9.2 13-9.2s13 4 13 9.2-6 9.2-13 9.2S4 21.2 4 16Z'/%3E%3Cpath d='M30 16l12-7v14l-12-7Z'/%3E",
+  },
+  plane: {
+    box: '0 0 48 32',
+    d: "%3Cpath d='M4 4 44 18l-14 4-4 8-6-9'/%3E%3Cpath d='M4 4 20 30l6-8'/%3E",
+  },
+  pencil: {
+    box: '0 0 40 40',
+    d: "%3Cpath d='M6.5 33.5 9 26 27 8l5 5-18 18-7.5 2.5Z'/%3E%3Cpath d='M9 26l5 5'/%3E",
+  },
 }
 
 export function cursorUrl(id) {
-  const paths = CURSOR_PATHS[id] || CURSOR_PATHS.fish
-  const box = id === 'balloon' ? '0 0 48 44' : '0 0 48 32'
-  return `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='22' viewBox='${box}'%3E%3Cg fill='none' stroke='%231F1C18' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E${paths}%3C/g%3E%3C/svg%3E")`
+  const { box, d } = CURSORS[id] || CURSORS.fish
+  return `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='22' viewBox='${box}'%3E%3Cg fill='none' stroke='%231F1C18' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E${d}%3C/g%3E%3C/svg%3E")`
 }
 
 /* ----------------------------------------------------------------- stamp */

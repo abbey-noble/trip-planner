@@ -1646,29 +1646,31 @@ textarea.form-input { resize: vertical; min-height: 62px; line-height: 1.55 }
 
 /* ============ Icon picker ============ */
 
+/* One block: seven equal columns, three square cells each. */
 .icon-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(74px, 1fr));
-  gap: 14px 10px;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 5px;
 }
 
 .icon-col {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
+  display: grid;
+  grid-template-rows: auto repeat(3, 1fr);
+  gap: 5px;
   min-width: 0;
 }
 
 .icon-col-label {
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.06em;
   color: var(--ink-faint);
-  margin-bottom: 2px;
-  white-space: nowrap;
+  text-align: center;
+  line-height: 1.2;
+  min-height: 1.2em;
+  margin-bottom: 1px;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .icon-choice {
@@ -1676,7 +1678,8 @@ textarea.form-input { resize: vertical; min-height: 62px; line-height: 1.55 }
   align-items: center;
   justify-content: center;
   aspect-ratio: 1;
-  padding: 9px;
+  width: 100%;
+  padding: 18%;
   background: var(--surface);
   border: 1px solid var(--rule);
   border-radius: var(--radius);
@@ -1684,14 +1687,18 @@ textarea.form-input { resize: vertical; min-height: 62px; line-height: 1.55 }
   transition: all var(--t);
 }
 
-.icon-choice svg { width: 100%; height: auto; max-height: 100% }
+.icon-choice svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
 .icon-choice:hover { border-color: var(--ink-muted); color: var(--ink-muted) }
 
 .icon-choice.chosen {
   border-color: var(--ink);
   color: var(--ink);
-  box-shadow: inset 0 0 0 1px var(--ink);
+  background: var(--wash);
 }
 
 .join-code {
