@@ -7,7 +7,6 @@ export const RESTAURANT_CATEGORIES = [
 
 export const EXPERIENCE_CATEGORIES = [
   { id: 'water', label: 'Water / Boat' },
-  { id: 'food-drink', label: 'Food & drink' },
   { id: 'outdoors', label: 'Outdoors' },
   { id: 'culture', label: 'Culture' },
   { id: 'wellness', label: 'Wellness' },

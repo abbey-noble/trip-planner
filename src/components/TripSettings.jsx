@@ -4,6 +4,7 @@ import { exportData, importData } from '../store'
 import LocationPicker from './LocationPicker'
 import ImageInput from './ImageInput'
 import SyncPanel from './SyncPanel'
+import { ICON_SETS, ICON_SLOTS, DEFAULT_ICONS } from '../motifs'
 
 export default function TripSettings({ onClose }) {
   const { data, updateData } = useData()
@@ -122,6 +123,37 @@ export default function TripSettings({ onClose }) {
             quality={0.72}
           />
           <div className="form-hint">Sits behind the pages.</div>
+        </div>
+
+        <hr className="form-divider" />
+        <h3 className="form-section-title">Icons</h3>
+
+        <div className="icon-grid">
+          {ICON_SLOTS.map(slot => (
+            <div key={slot.key} className="icon-col">
+              <div className="icon-col-label">{slot.label}</div>
+              {ICON_SETS[slot.key].map(({ id, label, Icon }) => {
+                const chosen = (form.icons?.[slot.key] || DEFAULT_ICONS[slot.key]) === id
+                return (
+                  <button
+                    key={id}
+                    type="button"
+                    title={label}
+                    aria-label={`${slot.label}: ${label}`}
+                    aria-pressed={chosen}
+                    className={`icon-choice${chosen ? ' chosen' : ''}`}
+                    onClick={() => set('icons', {
+                      ...DEFAULT_ICONS,
+                      ...form.icons,
+                      [slot.key]: id,
+                    })}
+                  >
+                    <Icon />
+                  </button>
+                )
+              })}
+            </div>
+          ))}
         </div>
 
         <hr className="form-divider" />

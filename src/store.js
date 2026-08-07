@@ -1,3 +1,5 @@
+import { DEFAULT_ICONS } from './motifs'
+
 const STORAGE_KEY = 'trip-planner-data'
 
 const defaultData = {
@@ -9,6 +11,7 @@ const defaultData = {
     endDate: '',
     coverImage: '',
     bannerImage: '',
+    icons: { ...DEFAULT_ICONS },
     accommodation: {
       name: '',
       coordinates: null,
@@ -37,7 +40,13 @@ export function normalise(parsed) {
         ...defaultData.trip.accommodation,
         ...(parsed?.trip?.accommodation || {}),
       },
+      icons: { ...DEFAULT_ICONS, ...(parsed?.trip?.icons || {}) },
     },
+  }
+
+  // "Food & drink" was removed from Do; Eat covers it.
+  for (const item of data.experiences || []) {
+    if (item.category === 'food-drink') item.category = 'other'
   }
   for (const key of ['restaurants', 'experiences', 'locations', 'itinerary', 'board']) {
     if (!Array.isArray(data[key])) data[key] = []

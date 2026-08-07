@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { useData } from '../App'
 import { generateId } from '../store'
 import ImageInput from './ImageInput'
-import { Sun } from '../motifs'
+import { iconFor } from '../motifs'
 
 /** A visual scrapbook: pinned images with an optional note and link. */
 export default function Board() {
-  const { data, updateData } = useData()
+  const { data, icons, updateData } = useData()
+  const Motif = iconFor('board', icons.board)
   const [editing, setEditing] = useState(null)
   const [showForm, setShowForm] = useState(false)
   const [lightbox, setLightbox] = useState(null)
@@ -78,7 +79,7 @@ export default function Board() {
           onClick={() => { setEditing(null); setShowForm(true) }}
           title="Pin an image"
         >
-          <Sun className="add-btn-motif" />
+          <Motif className="add-btn-motif" />
           <span>Add</span>
         </button>
       </div>

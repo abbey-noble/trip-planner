@@ -3,7 +3,7 @@ import { useData } from '../App'
 import { generateId } from '../store'
 import { travelSummary } from '../utils'
 import { categoryLabel, TRAVEL_MODES } from '../categories'
-import { TYPE_MOTIF } from '../motifs'
+import { iconFor, TYPE_SLOT } from '../motifs'
 import LocationPicker from './LocationPicker'
 import ImageInput from './ImageInput'
 
@@ -24,12 +24,12 @@ export default function CollectionPage({
   renderExtraFields,
   renderMeta,
 }) {
-  const { data, updateData, showOnMap, schedule, scheduledIds } = useData()
+  const { data, icons, updateData, showOnMap, schedule, scheduledIds } = useData()
   const [filter, setFilter] = useState('all')
   const [editing, setEditing] = useState(null)
   const [showForm, setShowForm] = useState(false)
 
-  const Motif = TYPE_MOTIF[type]
+  const Motif = iconFor(TYPE_SLOT[type], icons[TYPE_SLOT[type]])
   const items = data[collectionKey]
   const filtered = filter === 'all' ? items : items.filter(i => i.category === filter)
   const hotelCoords = data.trip.accommodation?.coordinates

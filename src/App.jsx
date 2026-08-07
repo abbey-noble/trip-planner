@@ -12,7 +12,7 @@ import MapView from './components/MapView'
 import Itinerary from './components/Itinerary'
 import Board from './components/Board'
 import ScheduleModal from './components/ScheduleModal'
-import { Stamp } from './motifs'
+import { Stamp, iconFor, cursorUrl, DEFAULT_ICONS } from './motifs'
 
 const DataContext = createContext()
 
@@ -128,8 +128,19 @@ export default function App() {
     [data.itinerary]
   )
 
+  const icons = useMemo(
+    () => ({ ...DEFAULT_ICONS, ...(data.trip.icons || {}) }),
+    [data.trip.icons]
+  )
+
+  // The pointer is a CSS variable so it can change without a rebuild.
+  useEffect(() => {
+    document.documentElement.style.setProperty('--cursor-icon', cursorUrl(icons.cursor))
+  }, [icons.cursor])
+
   const ctx = useMemo(() => ({
     data,
+    icons,
     updateData,
     generateId,
     hiddenCategories,
@@ -139,7 +150,7 @@ export default function App() {
     scheduledIds,
     schedule: setScheduling,
     isWide,
-  }), [data, updateData, hiddenCategories, toggleCategory, focus, showOnMap, scheduledIds, isWide])
+  }), [data, icons, updateData, hiddenCategories, toggleCategory, focus, showOnMap, scheduledIds, isWide])
 
   const needsSetup = !data.trip.name && !data.trip.location
   const showSplit = isWide && SPLIT_TABS.includes(activeTab) && !needsSetup
@@ -181,7 +192,7 @@ export default function App() {
             </div>
 
             <div className="masthead-right">
-              <Stamp label={stampLabel} />
+              <Stamp label={stampLabel} motif={iconFor('cursor', icons.cursor)} />
               <div className="header-actions">
                 {syncStatus.state !== 'off' && (
                   <span

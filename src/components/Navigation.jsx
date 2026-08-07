@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react'
-import { TAB_MOTIF } from '../motifs'
+import { iconFor } from '../motifs'
+import { useData } from '../App'
 
 const tabs = [
   { id: 'map', label: 'Map' },
@@ -11,6 +12,7 @@ const tabs = [
 ]
 
 export default function Navigation({ activeTab, onTabChange }) {
+  const { icons } = useData()
   const navRef = useRef(null)
 
   // On narrow screens the strip scrolls, so keep the current tab in view.
@@ -22,7 +24,7 @@ export default function Navigation({ activeTab, onTabChange }) {
   return (
     <nav className="nav" ref={navRef}>
       {tabs.map(tab => {
-        const Motif = TAB_MOTIF[tab.id]
+        const Motif = iconFor(tab.id, icons[tab.id])
         return (
           <button
             key={tab.id}
