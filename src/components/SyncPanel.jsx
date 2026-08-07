@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { readConfig, writeConfig, clearConfig, isConfigured } from '../supabase'
 import {
-  getSession, signIn, signInWithPassword, signUpWithPassword,
+  getSession, signIn, signInWithPassword, signUpWithPassword, updatePassword,
   signOut, onAuthChange, getJoinCode, joinTrip,
 } from '../sync'
 
@@ -54,6 +54,7 @@ export default function SyncPanel() {
             </div>
           </div>
 
+          <PasswordForm />
           <SharePanel />
         </>
       ) : (
@@ -135,7 +136,12 @@ function SignInForm() {
       }
       setState('idle')
     } catch (e) {
-      setError(e?.message || 'That did not work.')
+      const raw = e?.message || 'That did not work.'
+      setError(
+        /already registered|already exists/i.test(raw)
+          ? 'That email already has an account. Use Sign in instead.'
+          : raw
+      )
       setState('idle')
     }
   }
@@ -269,5 +275,54 @@ function SharePanel() {
         </button>
       </div>
     </>
+  )
+}
+
+/** Adds a password to an account, so a link is never needed again. */
+function PasswordForm() {
+  const [password, setPassword] = useState('')
+  const [state, setState] = useState('idle')
+  const [error, setError] = useState('')
+
+  const save = async () => {
+    if (password.length < 6) return
+    setState('working')
+    setError('')
+    try {
+      await updatePassword(password)
+      setPassword('')
+      setState('done')
+    } catch (e) {
+      setError(e?.message || 'Could not set the password.')
+      setState('idle')
+    }
+  }
+
+  return (
+    <div className="form-group">
+      <label className="form-label">Password</label>
+      <input
+        className="form-input"
+        type="password"
+        autoComplete="new-password"
+        value={password}
+        onChange={e => { setPassword(e.target.value); setState('idle') }}
+        placeholder="At least 6 characters"
+      />
+      <div className="form-hint">
+        {state === 'done'
+          ? 'Password saved. Use it to sign in on your other devices.'
+          : 'Set one to sign in on another device without waiting for an email.'}
+      </div>
+      {error && <div className="form-hint" style={{ color: 'var(--danger)' }}>{error}</div>}
+      <button
+        className="data-btn"
+        style={{ marginTop: 12 }}
+        onClick={save}
+        disabled={state === 'working' || password.length < 6}
+      >
+        {state === 'working' ? 'Saving…' : 'Set password'}
+      </button>
+    </div>
   )
 }

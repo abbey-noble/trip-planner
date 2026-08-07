@@ -80,6 +80,14 @@ export async function signUpWithPassword(email, password) {
   return { needsConfirmation: !data.session }
 }
 
+/** Sets or changes the password on the signed-in account. Needs no email. */
+export async function updatePassword(password) {
+  const client = getClient()
+  if (!client) throw new Error('Sync is not set up yet.')
+  const { error } = await client.auth.updateUser({ password })
+  if (error) throw error
+}
+
 export async function signOut() {
   const client = getClient()
   if (!client) return
