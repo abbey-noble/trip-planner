@@ -8,7 +8,7 @@ All data is stored in the browser's `localStorage` on the device you are using.
 
 (this project was for fun and it is mostly vibe coded)
 
-## Running it
+## Running
 
 ```
 npm install
