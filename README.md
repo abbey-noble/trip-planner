@@ -30,12 +30,6 @@ npm run preview   # serve the built site locally
 `dist/` is a plain static site with relative paths, so it can be hosted from any
 static host or subdirectory.
 
-## On the phone
-
-The build includes a web app manifest and a service worker. Once the site is
-served over HTTPS (or from `localhost`), open it in a browser, then Share -> Add to
-Home Screen. It launches full screen and works offline.
-
 ## Syncing between devices
 
 Sync keeps your laptop and the phone showing the same trip. 
